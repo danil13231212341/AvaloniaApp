@@ -1,0 +1,42 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:AvaloniaApp.ViewModels"
+        x:Class="AvaloniaApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Гонки" Width="800" Height="600">
+    <DockPanel LastChildFill="True" Margin="10">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="10">
+            <Button Content="Добавить болид" Command="{Binding AddNewCarCommand}" Width="150"/>
+            <Button Content="Добавить погрузчик" Command="{Binding AddNewLoaderCommand}" Width="150"/>
+            <Button Content="Остановить все болиды" Command="{Binding StopAllCarsCommand}" Width="150"/>
+        </StackPanel>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Болиды" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding RacingCars}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер" Binding="{Binding Id}" Width="*"/>
+                    <DataGridTextColumn Header="Дистанция" Binding="{Binding Distance}" Width="*"/>
+                    <DataGridTextColumn Header="Состояние" Binding="{Binding Condition}" Width="*"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Grid.Row="2" Text="Погрузчики" FontSize="16" FontWeight="Bold" Margin="0,10,0,10"/>
+            <DataGrid Grid.Row="3" ItemsSource="{Binding Loaders}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер" Binding="{Binding Id}" Width="*"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="*"/>
+                    <DataGridTextColumn Header="Машина" Binding="{Binding EvacuatedCarId}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</Window>
